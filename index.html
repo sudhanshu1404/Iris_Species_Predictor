@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🌸 Iris Species Predictor 🌼</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-label {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .slider-value {
+            font-size: 1.1em;
+            color: #d63384;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍🌸 Predict Your Iris Species! 🌸🔍</h1>
+
+        <div class="intro-box">
+            <p id="intro-text">
+                📘 The Iris dataset was introduced by Ronald Fisher in 1936. 
+                It contains measurements of iris flowers — sepal and petal length and width — 
+                to classify them into 3 species: Setosa, Versicolor, and Virginica.
+            </p>
+            <button class="speak-btn" onclick="readText('intro-text')">🔊 Read About Iris</button>
+        </div>
+
+        <form method="POST" action="/predict">
+            <!-- 🌱 Sepal Length -->
+            <div class="slider-container">
+                <label class="slider-label">1️⃣ Sepal Length (cm):</label>
+                <input type="range" name="sepal_length" min="4" max="8" step="0.1" value="5" oninput="updateValue(this, 'val1')">
+                <span class="slider-value" id="val1">5.0</span>
+            </div>
+
+            <!-- 🌱 Sepal Width -->
+            <div class="slider-container">
+                <label class="slider-label">2️⃣ Sepal Width (cm):</label>
+                <input type="range" name="sepal_width" min="2" max="4.5" step="0.1" value="3" oninput="updateValue(this, 'val2')">
+                <span class="slider-value" id="val2">3.0</span>
+            </div>
+
+            <!-- 🌸 Petal Length -->
+            <div class="slider-container">
+                <label class="slider-label">3️⃣ Petal Length (cm):</label>
+                <input type="range" name="petal_length" min="1" max="7" step="0.1" value="4" oninput="updateValue(this, 'val3')">
+                <span class="slider-value" id="val3">4.0</span>
+            </div>
+
+            <!-- 🌸 Petal Width -->
+            <div class="slider-container">
+                <label class="slider-label">4️⃣ Petal Width (cm):</label>
+                <input type="range" name="petal_width" min="0.1" max="3" step="0.1" value="1" oninput="updateValue(this, 'val4')">
+                <span class="slider-value" id="val4">1.0</span>
+            </div>
+
+            <button class="glow-on-hover" type="submit">✨ Predict Species ✨</button>
+        </form>
+
+        <img src="https://i.ibb.co/DLk7tLg/iris-flower-cartoon.png" alt="Iris Cartoon" class="iris-image">
+    </div>
+
+    <script>
+        function updateValue(slider, id) {
+            document.getElementById(id).innerText = slider.value;
+        }
+
+        function readText(id) {
+            const text = document.getElementById(id).innerText;
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.pitch = 1.8; // child-like voice
+            msg.rate = 1.2;
+            speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
