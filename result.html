@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔮 Prediction Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container result-box">
+        <h1>🎉 Prediction Complete! 🎉</h1>
+        <h2 class="result-text">
+            🌺 Your Iris Species is: <span id="species">{{ prediction }}</span> 🌺
+        </h2>
+        <p id="description">{{ description }}</p>
+        <button class="speak-btn" onclick="readResult()">🔊 Read Result</button>
+        <br><br>
+        <a href="/" class="glow-on-hover">🔄 Try Another</a>
+
+        <div class="flowers">
+            🌷💐🌻🌼🌸🪷🌺
+        </div>
+    </div>
+
+    <script>
+        function readResult() {
+            const species = document.getElementById("species").innerText;
+            const desc = document.getElementById("description").innerText;
+            const msg = new SpeechSynthesisUtterance("The predicted Iris species is " + species + ". " + desc);
+            msg.pitch = 1.8;
+            msg.rate = 1.2;
+            speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
